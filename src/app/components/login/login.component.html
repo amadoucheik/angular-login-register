@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm">
+
+  <p-card header="Assu-Mobile Login" [style]="{width:'360px'}">
+
+   <div class="field">
+      <label for="email">Email</label>
+     <input type="text" pInputText formControlName="email" class="w-full" name="email" placeholder="Enter your email"/>
+   </div>
+
+    <small *ngIf="email.invalid && (email.dirty || email.touched)" class="block p-error">
+      <div *ngIf="email.errors?.['required']">email is required</div>
+      <div *ngIf="email.errors?.['email']">email should be valid</div>
+    </small>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" pInputText formControlName="password" class="w-full" name="password" placeholder="Enter your password"/>
+    </div>
+
+    <small *ngIf="password.invalid && (email.dirty || email.touched)" class="block p-error">
+      <div *ngIf="password.errors?.['required']">password is required</div>
+      <div *ngIf="password.errors?.['password']">password should be valid</div>
+    </small>
+
+    <p-button label="SIGN IN" styleClass="w-full" [disabled]="loginForm.invalid"></p-button>
+
+    <div class="mt-2">
+      Not a member ? <a routerLink="/register">Register</a>
+    </div>
+
+  </p-card>
+</form>
