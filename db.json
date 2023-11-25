@@ -1,3 +1,11 @@
 {
-  "users": []
+  "users": [
+    {
+      "firstName": "ismo",
+      "lastName": "killer",
+      "email": "iso@mail.com",
+      "password": "pass",
+      "id": 1
+    }
+  ]
 }

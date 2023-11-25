@@ -13,6 +13,10 @@ import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from "@angular/common/http";
 import { MenubarModule } from 'primeng/menubar';
 
+import { ToastModule } from 'primeng/toast';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MessageService } from "primeng/api";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +33,13 @@ import { MenubarModule } from 'primeng/menubar';
     ButtonModule,
     HttpClientModule,
     MenubarModule,
+    ToastModule,
+    BrowserAnimationsModule,
+
   ],
-  providers: [],
+  providers: [
+    MessageService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

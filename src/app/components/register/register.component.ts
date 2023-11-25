@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {passwordMatchValidator} from "../../shared/password-match.directive";
+import {AuthService} from "../../services/auth.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import {User} from "../../interfaces/auth";
+import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -21,6 +26,12 @@ export class RegisterComponent {
     validators: passwordMatchValidator
   })
 
+  constructor(
+    private fb: FormBuilder, private authService: AuthService,
+    private messageService: MessageService,
+    private router: Router
+  ) {}
+
   get firstName(){
     return this.registerForm.controls['firstName']
   }
@@ -38,10 +49,20 @@ export class RegisterComponent {
   }
 
   submitDetails(){
-    console.log(this.registerForm.value)
+    const postData = {...this.registerForm.value};
+    delete postData.confirmPassword;
+    this.authService.registerUser(postData as User).subscribe(
+      response => {
+        console.log(response);
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
+        this.router.navigate(['login'])
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong retry :)' });
+      }
+    )
   }
 
-  constructor(private fb: FormBuilder) {}
 
   protected readonly passwordMatchValidator = passwordMatchValidator;
 
